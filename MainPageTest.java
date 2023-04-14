@@ -144,4 +144,4 @@ public class MainPageTest {
 }
 
 
-//comment made by Santiago Silva for testing purpose
+//comment made by Santiago Silva for testing purposes
