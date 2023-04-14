@@ -142,3 +142,6 @@ public class MainPageTest {
 //        assertEquals("All Developer Tools and Products by JetBrains", driver.getTitle());
 //    }
 }
+
+
+//comment made by Santiago Silva for testing purposes
