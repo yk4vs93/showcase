@@ -25,17 +25,14 @@ public class MainPage {
     @FindBy(xpath = "//*[@id='distribution1']")
     public WebElement distribution;
 
-    @FindBy(xpath = "//*[@id='refresh1']")
-    public WebElement firstCheckBox;
-
     @FindBy(xpath = "//*[@id='adv1']")
     public WebElement secondCheckBox;
 
     @FindBy(xpath = "//*[@id='digits']")
     public WebElement roundingDropBox;
 
-
-
+    @FindBy(css = "html > body > div:nth-of-type(3) > div > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(10) > div")
+    public WebElement firstCheckBox;
 
     public MainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.Select;
 
@@ -31,7 +30,7 @@ public class MainPageTest {
 
     @AfterEach
     public void tearDown() {
-        //driver.quit();
+        driver.quit();
     }
 
 
@@ -40,24 +39,32 @@ public class MainPageTest {
 
     @Test
     public void baseCase(){
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         Select select1 =  new Select(mainPage.roundingDropBox);
         select1.selectByValue("1");
         sleep();
         mainPage.sigLevel.sendKeys("0.05");
         mainPage.statistic.sendKeys("0.05");
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+
         mainPage.firstCheckBox.click();
         mainPage.inputSigma.sendKeys(".05");
         mainPage.MeanInput.sendKeys("5");
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
+
         jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         sleep();
         mainPage.SubmitButton.click();
         sleep();
+        WebElement result = driver.findElement(By.xpath("//*[text() = '0']"));
+        assertTrue(result.isDisplayed());
     }
     @Test
     //[t -distribution, two tailed , 1 , 0.05 , 0.05 , 5 , .05 ,
     // first box unchecked , second box unchecked, calculate pressed , not back pressed ]
     public void TR1() {
+
+        mainPage.inputSigma.sendKeys(".05");
+        mainPage.MeanInput.sendKeys("5");
         select = new Select(mainPage.distribution);
         select.selectByValue("T");
         sleep();
@@ -67,18 +74,21 @@ public class MainPageTest {
         mainPage.sigLevel.sendKeys("0.05");
         mainPage.statistic.sendKeys("0.05");
         mainPage.firstCheckBox.click();
-        mainPage.inputSigma.sendKeys(".05");
-        mainPage.MeanInput.sendKeys("5");
+        sleep();
         JavascriptExecutor jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         sleep();
         mainPage.SubmitButton.click();
         sleep();
+        //WebElement result = driver.findElement(By.xpath("//*[text() = '0.5']"));
+        //assertTrue(result.isDisplayed());
     }
     @Test
     //[f- distribution , two tailed , 1 , 0.05 , 0.05 , 5 , .05 ,
     ///first box unchecked , second box unchecked, calculate pressed , not back pressed ]
     public void TR2(){
+        mainPage.inputSigma.sendKeys(".05");
+        mainPage.MeanInput.sendKeys("5");
         select = new Select(mainPage.distribution);
         select.selectByValue("F");
         sleep();
@@ -87,33 +97,19 @@ public class MainPageTest {
         sleep();
         mainPage.sigLevel.sendKeys("0.05");
         mainPage.statistic.sendKeys("0.05");
-        mainPage.firstCheckBox.click();
-        mainPage.inputSigma.sendKeys(".05");
-        mainPage.MeanInput.sendKeys("5");
         JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
+        mainPage.firstCheckBox.click();
+        sleep();
         jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
         sleep();
         mainPage.SubmitButton.click();
         sleep();
+        WebElement result = driver.findElement(By.xpath("//*[text() = '0.01']"));
+        assertTrue(result.isDisplayed());
     }
 
 
-//    @Test
-//    public void search() {
-//
-//        mainPage.MeanInput.clear();
-//        mainPage.MeanInput.sendKeys("3");
-//        mainPage.inputSigma.clear();
-//        mainPage.inputSigma.sendKeys("5");
-//        mainPage.inputSigma.sendKeys(Keys.RETURN);
-//        JavascriptExecutor jse = (JavascriptExecutor) driver;
-//        jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
-//        sleep();
-//        mainPage.SubmitButton.click();
-//        WebElement result = driver.findElement(By.xpath("//*[text() = '0.7642']"));
-//        assertTrue(result.isDisplayed());
-//
-//    }
 
     private static void sleep() {
         try {
@@ -142,6 +138,3 @@ public class MainPageTest {
 //        assertEquals("All Developer Tools and Products by JetBrains", driver.getTitle());
 //    }
 }
-
-
-//comment made by Santiago Silva for testing purposes3
