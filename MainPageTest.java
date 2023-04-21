@@ -80,8 +80,8 @@ public class MainPageTest {
         sleep();
         mainPage.SubmitButton.click();
         sleep();
-        //WebElement result = driver.findElement(By.xpath("//*[text() = '0.5']"));
-        //assertTrue(result.isDisplayed());
+        WebElement result = driver.findElement(By.xpath("//*[text() = '1']"));
+        assertTrue(result.isDisplayed());
     }
     @Test
     //[f- distribution , two tailed , 1 , 0.05 , 0.05 , 5 , .05 ,
@@ -115,7 +115,7 @@ public class MainPageTest {
         try {
             Thread.sleep(2000);     // specify milliseconds to wait
         } catch (Exception e) {
-            ;
+
         }
     }
 
